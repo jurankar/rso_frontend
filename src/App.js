@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from "./components/Header";
+import ApiResponseText from "./components/ApiResponseText";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <Header/>
+        <body>
+            <ApiResponseText
+                microservice_name="posts_containter"
+                api_link="http://20.237.81.147:8000/api/test"
+            />
+            <ApiResponseText
+                microservice_name="maps_container"
+                api_link="http://20.237.81.147:8000/api/maps"
+            />
+        </body>
     </div>
   );
 }
