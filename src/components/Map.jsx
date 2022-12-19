@@ -1,38 +1,70 @@
 import React from 'react'
-import GoogleMapReact from 'google-map-react'
-import './map.css'
-import {Polyline} from "google-maps-react";
-import {Marker} from "google-maps-react";
+import { GoogleMap, LoadScript, Polyline  } from '@react-google-maps/api';
 
+const containerStyle = {
+    marginLeft: '15%',
+    width: '70%',
+    height: '600px'
 
-const someCoords= [
-    {lat: 32.321, lng: -64.757},
-    {lat: 25.774, lng: -80.190}
+};
+
+const center = {
+    lat: 0,
+    lng: -180
+};
+
+const onLoad = polyline => {
+    console.log('polyline: ', polyline)
+};
+
+const path = [
+    {lat: 37.772, lng: -122.214},
+    {lat: 21.291, lng: -157.821},
+    {lat: -18.142, lng: 178.431},
+    {lat: -27.467, lng: 153.027}
 ];
 
-const Map = ({ location, zoomLevel }) => (
-    <div className="map">
-        <h2 className="map-h2">Come Visit Us At Our Campus</h2>
+const options = {
+    strokeColor: '#FF0000',
+    strokeOpacity: 0.8,
+    strokeWeight: 2,
+    fillColor: '#FF0000',
+    fillOpacity: 0.35,
+    clickable: false,
+    draggable: false,
+    editable: false,
+    visible: true,
+    radius: 30000,
+    paths: [
+        {lat: 37.772, lng: -122.214},
+        {lat: 21.291, lng: -157.821},
+        {lat: -18.142, lng: 178.431},
+        {lat: -27.467, lng: 153.027}
+    ],
+    zIndex: 1
+};
 
-        <div className="google-map">
-            <GoogleMapReact
-                bootstrapURLKeys={{
-                    key: "AIzaSyBhDyguP-Dme8qNjA_RM5CtGO8QwJyNQmc"
-                }}
-                center={{
-                    lat: someCoords[0].lat,
-                    lng: someCoords[0].lng,
-                }}
-                defaultZoom={15}>
-                <Polyline
-                    path={someCoords}
-                    strokeColor="#0000FF"
-                    strokeOpacity={0.8}
-                    strokeWeight={2} />
-                <Marker lat={someCoords[0].lat} lng={someCoords[0].lng} text='My Marker' />
-            </GoogleMapReact>
-        </div>
-    </div>
-)
+function Map() {
+    return (
+        <LoadScript
+            googleMapsApiKey="AIzaSyBhDyguP-Dme8qNjA_RM5CtGO8QwJyNQmc"
+        >
+            <GoogleMap
+                mapContainerStyle={containerStyle}
+                center={center}
+                zoom={10}
+            >
+                {
+                    <Polyline
+                        onLoad={onLoad}
+                        path={path}
+                        options={options}
+                    />
+                }
+                <></>
+            </GoogleMap>
+        </LoadScript>
+    )
+}
 
-export default Map
+export default React.memo(Map)
