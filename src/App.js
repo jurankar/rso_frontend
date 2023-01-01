@@ -16,12 +16,16 @@ function App() {
         <Header/>
         <body>
             <ApiResponseText
-                microservice_name="posts_containter"
-                api_link="http://20.237.81.147:8000/api/test"
+                text="Glede na vreme vam za dostavljanje pošiljk priporočamo "
+                api_link="http://104.45.183.75/api/weather/weather"
             />
             <ApiResponseText
-                microservice_name="maps_container"
-                api_link="http://20.237.81.147:8000/api/maps"
+                text="API response for microservice maps_containter is:"
+                api_link="http://104.45.183.75/api/maps/test"
+            />
+            <ApiResponseText
+                text="Trenutne cene bencina so:"
+                api_link="http://104.45.183.75/api/gas/gas"
             />
             <MapContainer location={location} zoomLevel={10} /> {/* include it here */}
         </body>

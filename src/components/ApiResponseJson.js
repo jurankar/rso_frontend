@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 
 
 
-const ApiResponseJson = ({ microservice_name, api_link }) => {
+const ApiResponseJson = ({ text, api_link }) => {
   const [response, setResponse] = useState('no_data')
 
   const fetchApiData = async () => {
@@ -26,7 +26,7 @@ const ApiResponseJson = ({ microservice_name, api_link }) => {
 
   return (
       <div className='api_div'>
-        <p>API response for microservice {microservice_name} is:</p>
+        <p>{text}</p>
         <p>{response}</p>
       </div>
   )

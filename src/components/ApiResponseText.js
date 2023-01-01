@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 
 
 
-const ApiResponseText = ({ microservice_name, api_link }) => {
+const ApiResponseText = ({ text, api_link }) => {
   const [response, setResponse] = useState('no_data')
 
   const fetchApiData = async () => {
@@ -25,8 +25,7 @@ const ApiResponseText = ({ microservice_name, api_link }) => {
 
   return (
       <div className='api_div'>
-        <p>API response for microservice {microservice_name} is:</p>
-        <p>{response}</p>
+        <p>{text} {response}</p>
       </div>
   )
 }

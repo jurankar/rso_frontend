@@ -6,7 +6,7 @@ const Map = () => {
 
     // API CALL
     const fetchApiData = async () => {
-        const res = await fetch("http://localhost:8002/api/maps")
+        const res = await fetch("http://104.45.183.75/api/maps/test")
         const data = await res.json()
 
         return data
