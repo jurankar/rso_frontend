@@ -1,36 +1,21 @@
-import './App.css';
-import Header from "./components/Header";
-import ApiResponseText from "./components/ApiResponseText";
-import MapContainer from "./components/Map"
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Layout from "./components/Layout"
+import Home from "./components/Home";
+import Registration from "./components/Registration";
 
-function App() {
-
-    const location = {
-        address: '1600 Amphitheatre Parkway, Mountain View, Yo Mama House.',
-        lat: 36.05298765935,
-        lng: -112.083756616339,
-    }
-
-  return (
-    <div className="App">
-        <Header/>
-        <body>
-            <ApiResponseText
-                text="Glede na vreme vam za dostavljanje pošiljk priporočamo "
-                api_link="http://104.45.183.75/api/weather/weather"
-            />
-            <ApiResponseText
-                text="API response for microservice maps_containter is:"
-                api_link="http://104.45.183.75/api/maps/test"
-            />
-            <ApiResponseText
-                text="Trenutne cene bencina so:"
-                api_link="http://104.45.183.75/api/gas/gas"
-            />
-            <MapContainer location={location} zoomLevel={10} /> {/* include it here */}
-        </body>
-    </div>
-  );
+export default function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<Layout />}>
+                    <Route index element={<Home />} />
+                    <Route path="registration" element={<Registration />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
+    );
 }
 
-export default App;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
