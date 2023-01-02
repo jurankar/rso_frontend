@@ -1,8 +1,5 @@
 import {useEffect, useState} from "react";
 
-
-
-
 const ApiResponseText = ({ text, api_link }) => {
   const [response, setResponse] = useState('no_data')
 
