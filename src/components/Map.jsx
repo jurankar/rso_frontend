@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { GoogleMap, LoadScript, Polyline  } from '@react-google-maps/api';
 
 const Map = () => {
-    const [path, setPath] = useState('no_data')
+    const [path, setPath] = useState([{lat: 46.0569474, lng: 14.5057471}])
 
     // API CALL
     const fetchApiData = async () => {
@@ -16,7 +16,7 @@ const Map = () => {
         const getResponse = async () => {
             const responseFromServer = await fetchApiData()
             setPath(responseFromServer.Koordinate)
-            console.log(path)
+            console.log("path: " , path)
         }
 
         getResponse()
