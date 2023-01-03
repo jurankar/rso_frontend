@@ -22,9 +22,7 @@ const Login = ({api_link }) => {
         body: body,
       });
       let resJson = await res.text();
-      console.log(0)
       const resJsonParsed = JSON.parse(resJson)
-      console.log(1)
       if (res.status === 200) {
         setPassword("");
         token_var = resJsonParsed.token;
@@ -33,6 +31,35 @@ const Login = ({api_link }) => {
       } else {
         setMessage("Some error occured");
       }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+  // Submit Ratings
+  const [user_id, setUser_id] = useState("");
+  const [rating, setRating] = useState("");
+  const [messageRating, setMessageRating] = useState("");
+  let handleSubmitRating = async (e) => {
+    e.preventDefault();
+
+    let body = JSON.stringify({
+      user_id: user_id*1,
+      rating: rating*1,
+    });
+    try {
+      let res = await fetch("http://104.45.183.75/posts/rate", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': "Bearer " + token
+                },
+        body: body,
+      });
+      let resJson = await res.text();
+      setMessageRating(resJson);
+
     } catch (err) {
       console.log(err);
     }
@@ -67,7 +94,28 @@ const Login = ({api_link }) => {
           />
         </div>
 
+        {token.length > 0 &&
+          <form onSubmit={handleSubmitRating}>
+            <input
+                type="text"
+                value={user_id}
+                placeholder="User id"
+                onChange={(e) => setUser_id(e.target.value)}
+            />
+            <input
+                type="text"
+                value={rating}
+                placeholder="Rating 1-5"
+                onChange={(e) => setRating(e.target.value)}
+            />
+            <button type="submit">Submit Rating</button>
+
+            <div className="message">{messageRating ? <p>{messageRating}</p> : null}</div>
+          </form>
+        }
+
       </div>
+
   );
 }
 
